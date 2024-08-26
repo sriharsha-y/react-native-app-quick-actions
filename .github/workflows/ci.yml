@@ -123,6 +123,9 @@ jobs:
       - name: List available Xcode versions
         run: ls /Applications | grep Xcode
 
+      - name: Set up Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_16.1_beta.app/Contents/Developer
+
       - name: Cache turborepo for iOS
         uses: actions/cache@v3
         with:
