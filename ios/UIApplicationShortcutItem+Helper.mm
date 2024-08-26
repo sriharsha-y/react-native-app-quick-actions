@@ -1,35 +1,35 @@
 #import "UIApplicationShortcutItem+Helper.h"
 
 static NSDictionary<NSString *, NSNumber *> *iconTypeMap = @{
-  @"compose": @(UIApplicationShortcutIconTypeCompose),
-  @"play": @(UIApplicationShortcutIconTypePlay),
-  @"pause": @(UIApplicationShortcutIconTypePause),
-  @"add": @(UIApplicationShortcutIconTypeAdd),
-  @"location": @(UIApplicationShortcutIconTypeLocation),
-  @"search": @(UIApplicationShortcutIconTypeSearch),
-  @"share": @(UIApplicationShortcutIconTypeShare),
-  @"prohibit": @(UIApplicationShortcutIconTypeProhibit),
-  @"contact": @(UIApplicationShortcutIconTypeContact),
-  @"home": @(UIApplicationShortcutIconTypeHome),
-  @"markLocation": @(UIApplicationShortcutIconTypeMarkLocation),
-  @"favorite": @(UIApplicationShortcutIconTypeFavorite),
-  @"love": @(UIApplicationShortcutIconTypeLove),
-  @"cloud": @(UIApplicationShortcutIconTypeCloud),
-  @"invitation": @(UIApplicationShortcutIconTypeInvitation),
-  @"confirmation": @(UIApplicationShortcutIconTypeConfirmation),
-  @"mail": @(UIApplicationShortcutIconTypeMail),
-  @"message": @(UIApplicationShortcutIconTypeMessage),
-  @"date": @(UIApplicationShortcutIconTypeDate),
-  @"time": @(UIApplicationShortcutIconTypeTime),
-  @"capturePhoto": @(UIApplicationShortcutIconTypeCapturePhoto),
-  @"captureVideo": @(UIApplicationShortcutIconTypeCaptureVideo),
-  @"task": @(UIApplicationShortcutIconTypeTask),
-  @"taskCompleted": @(UIApplicationShortcutIconTypeTaskCompleted),
-  @"alarm": @(UIApplicationShortcutIconTypeAlarm),
-  @"bookmark": @(UIApplicationShortcutIconTypeBookmark),
-  @"shuffle": @(UIApplicationShortcutIconTypeShuffle),
-  @"audio": @(UIApplicationShortcutIconTypeAudio),
-  @"update": @(UIApplicationShortcutIconTypeUpdate),
+    @"compose": @(UIApplicationShortcutIconTypeCompose),
+    @"play": @(UIApplicationShortcutIconTypePlay),
+    @"pause": @(UIApplicationShortcutIconTypePause),
+    @"add": @(UIApplicationShortcutIconTypeAdd),
+    @"location": @(UIApplicationShortcutIconTypeLocation),
+    @"search": @(UIApplicationShortcutIconTypeSearch),
+    @"share": @(UIApplicationShortcutIconTypeShare),
+    @"prohibit": @(UIApplicationShortcutIconTypeProhibit),
+    @"contact": @(UIApplicationShortcutIconTypeContact),
+    @"home": @(UIApplicationShortcutIconTypeHome),
+    @"markLocation": @(UIApplicationShortcutIconTypeMarkLocation),
+    @"favorite": @(UIApplicationShortcutIconTypeFavorite),
+    @"love": @(UIApplicationShortcutIconTypeLove),
+    @"cloud": @(UIApplicationShortcutIconTypeCloud),
+    @"invitation": @(UIApplicationShortcutIconTypeInvitation),
+    @"confirmation": @(UIApplicationShortcutIconTypeConfirmation),
+    @"mail": @(UIApplicationShortcutIconTypeMail),
+    @"message": @(UIApplicationShortcutIconTypeMessage),
+    @"date": @(UIApplicationShortcutIconTypeDate),
+    @"time": @(UIApplicationShortcutIconTypeTime),
+    @"capturePhoto": @(UIApplicationShortcutIconTypeCapturePhoto),
+    @"captureVideo": @(UIApplicationShortcutIconTypeCaptureVideo),
+    @"task": @(UIApplicationShortcutIconTypeTask),
+    @"taskCompleted": @(UIApplicationShortcutIconTypeTaskCompleted),
+    @"alarm": @(UIApplicationShortcutIconTypeAlarm),
+    @"bookmark": @(UIApplicationShortcutIconTypeBookmark),
+    @"shuffle": @(UIApplicationShortcutIconTypeShuffle),
+    @"audio": @(UIApplicationShortcutIconTypeAudio),
+    @"update": @(UIApplicationShortcutIconTypeUpdate),
 };
 
 @implementation UIApplicationShortcutItem (Helper)
@@ -62,7 +62,7 @@ static NSDictionary<NSString *, NSNumber *> *iconTypeMap = @{
                 icon = [UIApplicationShortcutIcon iconWithSystemImageName: [iconNameComponents lastObject]];
             } else if ([[iconNameComponents firstObject] isEqualToString:@"system"]) {
                 NSNumber *iconType = [iconTypeMap objectForKey:[iconNameComponents lastObject]];
-//                icon = [UIApplicationShortcutIcon iconWithType: [iconType integerValue]];
+                //                icon = [UIApplicationShortcutIcon iconWithType: [iconType integerValue]];
             }
         }
     }
