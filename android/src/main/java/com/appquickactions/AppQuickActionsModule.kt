@@ -19,6 +19,8 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.reactnativeactionsshortcuts.AppQuickActionsItem
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 class AppQuickActionsModule internal constructor(context: ReactApplicationContext) :
   AppQuickActionsSpec(context), ActivityEventListener {
@@ -35,7 +37,9 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
   }
 
   init {
-      reactApplicationContext.addActivityEventListener(this)
+    reactApplicationContext.addActivityEventListener(this)
+     val shortcutItem = getShortcutItemFromIntent(reactApplicationContext.currentActivity?.intent)
+    shortcutItem?.let {  sendEvent(it) }
   }
 
   @TargetApi(25)
@@ -126,10 +130,23 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
 
   override fun onNewIntent(p0: Intent?) {
     val shortcutItem = getShortcutItemFromIntent(p0) ?: return
+    sendEvent(shortcutItem)
+  }
 
-    reactApplicationContext
-      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      .emit(EVENT_ON_SHORTCUT_ITEM_PRESSED, shortcutItem.toMap())
+  private fun sendEvent(shortcutItem: AppQuickActionsItem) {
+
+    if(reactApplicationContext.isOnJSQueueThread)
+    {
+      Timer().schedule(1000) {
+        sendEvent(shortcutItem)
+      }
+      return
+    }
+
+    reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+      ?.emit(EVENT_ON_SHORTCUT_ITEM_PRESSED, shortcutItem.toMap())
+
+
   }
 
   private fun getShortcutItemFromIntent(intent: Intent?): AppQuickActionsItem? {
