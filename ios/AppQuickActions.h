@@ -2,7 +2,7 @@
 #import "Actions.h"
 
 #ifdef RCT_NEW_ARCH_ENABLED
-#import "RNAppQuickActionsSpec.h"
+#import <RNAppQuickActionsSpec/RNAppQuickActionsSpec.h>
 
 @interface AppQuickActions : RCTEventEmitter <NativeAppQuickActionsSpec, ActionsDelegate>
 #else

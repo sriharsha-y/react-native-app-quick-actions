@@ -133,24 +133,6 @@ jobs:
             echo "turbo_cache_hit=1" >> $GITHUB_ENV
           fi
 
-      - name: Cache Gems
-        if: env.turbo_cache_hit != 1
-        id: gems-cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            example/vendor
-          key: ${{ runner.os }}-gems-${{ hashFiles('example/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
-      - name: Install Gems
-        if: env.turbo_cache_hit != 1 && steps.gems-cache.outputs.cache-hit != 'true'
-        run: |
-          cd example
-          gem install bundler
-          bundle install
-
       - name: Cache cocoapods
         if: env.turbo_cache_hit != 1
         id: cocoapods-cache
@@ -166,14 +148,11 @@ jobs:
         if: env.turbo_cache_hit != 1 && steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           cd example/ios
-          rm -rf Pods
-          rm -rf build
-          xcodebuild clean
-          bundle exec pod install
+          pod install
         env:
           NO_FLIPPER: 1
           RCT_NEW_ARCH_ENABLED: 1
 
       - name: Build example for iOS
         run: |
-          yarn turbo run build:ios --cache-dir="${{ env.TURBO_CACHE_DIR }}" --force=true
+          yarn turbo run build:ios --cache-dir="${{ env.TURBO_CACHE_DIR }}"
