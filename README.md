@@ -33,6 +33,14 @@ No specific setup required
 
 ## Summary
 
+### API
+
+| method                                  | Description                    |
+| --------------------------------------- | ------------------------------ |
+| [setQuickActions](#setquickactions)     | sets the quick actions         |
+| [getQuickActions](#getquickactions)     | gets the current quick actions |
+| [clearQuickActions](#clearquickactions) | clears existing quick actions  |
+
 ### QuickActionItem
 
 | Key        | Android | iOS | Description                                                                     |

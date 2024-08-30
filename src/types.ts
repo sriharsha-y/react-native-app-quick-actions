@@ -2,13 +2,7 @@ type IDictionary = {
   [key: string]: IAny;
 };
 
-type IAny =
-  | boolean
-  | number
-  | string
-  | Object
-  | IDictionary
-  | Array<IAny>;
+type IAny = boolean | number | string | Object | IDictionary | Array<IAny>;
 
 export interface Specification {
   /**
