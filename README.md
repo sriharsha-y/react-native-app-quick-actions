@@ -114,17 +114,35 @@ AppQuickActions.clearQuickActions();
 ```js
 useEffect(() => {
   const eventEmitter = new NativeEventEmitter(AppQuickActions);
-  const sub = eventEmitter.addListener('onQuickActionItemPressed', (item) => {
-    const { type, data } = item;
-    console.log(
-      `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}`
-    );
-  });
+  const sub = eventEmitter.addListener(
+    'onQuickActionItemPressed',
+    ({ item, initial }) => {
+      const { type, data } = item;
+      console.log(
+        `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}, isInitial: ${initial}`
+      );
+    }
+  );
   return () => sub.remove();
 }, []);
 ```
 
-> Either the app is launched with a quick action or when the app is brought to foreground using a quick action, In both cases event is emitted.
+> Either the app is launched with a quick action or when the app is brought to foreground using a quick action, In both cases event is emitted and the `initial` flag is set accordingly in the callback.
+
+### Hooks
+
+For convenience there is hook for handling quick action events.
+
+#### useAppQuickActionHandler
+
+```js
+useAppQuickActionHandler((item, initial) => {
+  const { type, data } = item;
+  console.log(
+    `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}, isInitial: ${initial}`
+  );
+});
+```
 
 ## Icons
 

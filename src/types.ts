@@ -4,6 +4,11 @@ type IDictionary = {
 
 type IAny = boolean | number | string | Object | IDictionary | Array<IAny>;
 
+export type QuickActionEventData = {
+  item: QuickActionItem;
+  initial: boolean;
+};
+
 export interface Specification {
   /**
    * Set the quick action items.

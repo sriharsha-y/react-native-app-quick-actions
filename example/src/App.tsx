@@ -37,16 +37,16 @@ export default function App() {
 
   useEffect(() => {
     const eventEmitter = new NativeEventEmitter(AppQuickActions);
-    const eventSubscription = eventEmitter.addListener(
+    const sub = eventEmitter.addListener(
       'onQuickActionItemPressed',
-      (item) => {
+      ({ item, initial }) => {
         const { type, data } = item;
         console.log(
-          `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}`
+          `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}, isInitial:${initial}`
         );
       }
     );
-    return () => eventSubscription.remove();
+    return () => sub.remove();
   }, []);
 
   return (

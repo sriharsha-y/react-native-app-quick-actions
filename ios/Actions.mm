@@ -32,7 +32,10 @@
     if(self.unhandledQuickActionItem == nil || self.delegate == nil) {
         return;
     }
-    [self.delegate onQuickActionItemPressed:self.unhandledQuickActionItem.asDictionary];
+    [self.delegate onQuickActionItemPressed:@{
+        @"item": self.unhandledQuickActionItem.asDictionary,
+        @"initial": @YES
+    }];
     self.unhandledQuickActionItem = nil;
 }
 
@@ -81,7 +84,10 @@
         _unhandledQuickActionItem = quickActionItem;
         return;
     }
-    [self.delegate onQuickActionItemPressed:quickActionItem.asDictionary];
+    [self.delegate onQuickActionItemPressed:@{
+        @"item": quickActionItem.asDictionary,
+        @"initial": @NO
+    }];
 }
 
 @end
