@@ -20,8 +20,8 @@ export interface Spec extends TurboModule {
   clearQuickActions(): void;
 
   /**
-   * Required for NativeEventEmitter.
-   * Implementation will be already provided by ReactNative
+   * Required for NativeEventEmitter when using Turbo Module
+   * Implementation will be already provided by ReactNative.
    */
   addListener: (eventType: string) => void;
   removeListeners: (count: number) => void;

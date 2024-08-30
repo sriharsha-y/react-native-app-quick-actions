@@ -26,12 +26,12 @@ const quickActionItems: QuickActionItem[] = [
 export default function App() {
   useEffect(() => {
     AppQuickActions.setQuickActions(quickActionItems)
-      .then((values: QuickActionItem[]) => {
-        console.log(`---> Quick Action Items Set: ${JSON.stringify(values)}`);
+      .then((items) => {
+        console.log(`---> Quick Action Items Set: ${JSON.stringify(items)}`);
         return AppQuickActions.getQuickActions();
       })
-      .then((values: QuickActionItem[]) =>
-        console.log(`---> Quick Action Items Get: ${JSON.stringify(values)}`)
+      .then((items) =>
+        console.log(`---> Quick Action Items Get: ${JSON.stringify(items)}`)
       );
   }, []);
 

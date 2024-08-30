@@ -1,7 +1,5 @@
 # react-native-app-quick-actions
 
-> [IN DEVELOPMENT]
-
 ReactNative App Quick Actions for Android & iOS. Inspired by [Expo Quick Actions](https://github.com/EvanBacon/expo-quick-actions) & [react-native-actions-shortcuts](https://github.com/mouselangelo/react-native-actions-shortcuts). Supports both Old (Native Module) and New (Turbo Module) Architecture of ReactNative
 
 ## Installation
@@ -33,6 +31,19 @@ In the `AppDelegate.m` or `AppDelegate.mm` file of the integrating project, belo
 
 No specific setup required
 
+## Summary
+
+### QuickActionItem
+
+| Key        | Android | iOS | Description                                                                     |
+| ---------- | :-----: | :-: | ------------------------------------------------------------------------------- |
+| type       |   ✅    | ✅  | unique string for the quick action                                              |
+| title      |   ✅    | ✅  | title string for the quick action                                               |
+| shortTitle |   ✅    | ❌  | shortTitle string which will be shown when there is space constraint in Android |
+| subtitle   |   ❌    | ✅  | subtitle string which will be shown below title in iOS                          |
+| iconName   |   ✅    | ✅  | iconName string                                                                 |
+| data       |   ✅    | ✅  | object to have user defined values                                              |
+
 ## Usage
 
 ### import
@@ -41,7 +52,7 @@ No specific setup required
 import AppQuickActions from 'react-native-app-quick-actions';
 ```
 
-you can also import the `QuickActionItem` type if required.
+you can also import the `QuickActionItem` type if working with typescript for defining the Quick Action Item.
 
 ```js
 import AppQuickActions, { type QuickActionItem } from 'react-native-app-quick-actions';
@@ -50,7 +61,7 @@ import AppQuickActions, { type QuickActionItem } from 'react-native-app-quick-ac
 ### setQuickActions
 
 ```javascript
-const quickActionItems: QuickActionItem[] = [
+const quickActionItems = [
   {
     type: 'com.quickactions1',
     title: 'Quick Action 1',
@@ -70,20 +81,18 @@ const quickActionItems: QuickActionItem[] = [
 ];
 
 useEffect(() => {
-    AppQuickActions.setQuickActions(quickActionItems)
-        .then((values: QuickActionItem[]) => {
-            console.log(`---> Quick Action Items Set: ${JSON.stringify(values)}`);
-        });
+  AppQuickActions.setQuickActions(quickActionItems).then((items) => {
+    console.log(`---> Quick Action Items Set: ${JSON.stringify(items)}`);
+  });
 }, []);
 ```
 
 ### getQuickActions
 
 ```js
-AppQuickActions.getQuickActions()
-    .then((values: QuickActionItem[]) =>
-        console.log(`---> Current Quick Action Items: ${JSON.stringify(values)}`)
-    );
+AppQuickActions.getQuickActions().then((items) =>
+  console.log(`---> Current Quick Action Items: ${JSON.stringify(items)}`)
+);
 ```
 
 ### clearQuickActions
@@ -91,6 +100,23 @@ AppQuickActions.getQuickActions()
 ```js
 AppQuickActions.clearQuickActions();
 ```
+
+### Listen for events
+
+```js
+useEffect(() => {
+  const eventEmitter = new NativeEventEmitter(AppQuickActions);
+  const sub = eventEmitter.addListener('onQuickActionItemPressed', (item) => {
+    const { type, data } = item;
+    console.log(
+      `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}`
+    );
+  });
+  return () => sub.remove();
+}, []);
+```
+
+> Either the app is launched with a quick action or when the app is brought to foreground using a quick action, In both cases event is emitted.
 
 ## Icons
 

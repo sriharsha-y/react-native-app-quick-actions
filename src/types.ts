@@ -1,14 +1,39 @@
-export type IDictionary = {
+type IDictionary = {
   [key: string]: IAny;
 };
 
-export type IAny =
+type IAny =
   | boolean
   | number
   | string
   | Object
   | IDictionary
   | Array<IAny>;
+
+export interface Specification {
+  /**
+   * Set the quick action items.
+   * @returns a promise with the items that were set
+   */
+  setQuickActions(items: QuickActionItem[]): Promise<QuickActionItem[]>;
+
+  /**
+   * @returns a promise with the quick action items that were set
+   */
+  getQuickActions(): Promise<QuickActionItem[]>;
+
+  /**
+   * Removes all the quick action items
+   */
+  clearQuickActions(): void;
+
+  /**
+   * Required for NativeEventEmitter when using Turbo Module
+   * Implementation will be already provided by ReactNative.
+   */
+  addListener: (eventType: string) => void;
+  removeListeners: (count: number) => void;
+}
 
 export interface QuickActionItem {
   /**

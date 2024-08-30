@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import type { QuickActionItem } from './types';
+import type { QuickActionItem, Specification } from './types';
 
 const LINKING_ERROR =
   `The package 'react-native-app-quick-actions' doesn't seem to be linked. Make sure: \n\n` +
@@ -14,7 +14,7 @@ const AppQuickActionsModule = isTurboModuleEnabled
   ? require('./NativeAppQuickActions').default
   : NativeModules.AppQuickActions;
 
-const AppQuickActions = AppQuickActionsModule
+const AppQuickActions: Specification = AppQuickActionsModule
   ? AppQuickActionsModule
   : new Proxy(
       {},
