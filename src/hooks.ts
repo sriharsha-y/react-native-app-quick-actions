@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { NativeEventEmitter } from 'react-native';
-import AppQuickActions from './quickActions';
+import AppQuickActions from './QuickActions';
 import type { QuickActionEventData } from './types';
 
 export const useAppQuickActionHandler = (

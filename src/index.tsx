@@ -1,4 +1,4 @@
-import AppQuickActions from './quickActions';
+import AppQuickActions from './QuickActions';
 
 export type { QuickActionItem } from './types';
 export { useAppQuickActionHandler } from './hooks';

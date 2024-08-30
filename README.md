@@ -136,7 +136,7 @@ For convenience there is hook for handling quick action events.
 #### useAppQuickActionHandler
 
 ```js
-useAppQuickActionHandler((item, initial) => {
+useAppQuickActionHandler(({ item, initial }) => {
   const { type, data } = item;
   console.log(
     `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}, isInitial: ${initial}`
