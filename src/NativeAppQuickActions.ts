@@ -14,6 +14,9 @@ export interface Spec extends TurboModule {
    */
   getQuickActions(): Promise<QuickActionItem[]>;
 
+  getInitialShortcut(): Promise<QuickActionItem>;
+  
+
   /**
    * Removes all the quick action items
    */
