@@ -77,7 +77,9 @@
     if(self.unhandledQuickActionItem == nil) {
         return nil;
     }
-    return self.unhandledQuickActionItem.asDictionary;
+    NSDictionary *quickActionItemCopy = self.unhandledQuickActionItem.asDictionary;
+    self.unhandledQuickActionItem = nil;
+    return quickActionItemCopy;
 }
 
 - (void)clearQuickActions {

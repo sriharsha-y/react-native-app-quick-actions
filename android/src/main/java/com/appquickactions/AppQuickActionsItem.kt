@@ -41,7 +41,7 @@ data class AppQuickActionsItem(
     }
     val mapToSend = Arguments.createMap()
     mapToSend.putMap(KeyName.item,map);
-    mapToSend.putBoolean(KeyName.initial,value = false)
+    mapToSend.putBoolean(KeyName.initial,false)
     return mapToSend
   }
 
