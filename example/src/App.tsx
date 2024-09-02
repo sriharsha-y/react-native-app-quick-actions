@@ -38,14 +38,14 @@ export default function App() {
   useEffect(() => {
     const eventEmitter = new NativeEventEmitter(AppQuickActions);
 
-    AppQuickActions.getInitialShortcut().then((item)=>console.log(`---> Quick Action Initial Get: ${JSON.stringify(item)}`));
+    AppQuickActions.getInitialShortcut().then((item)=>console.log(`---> Quick Action Initial Items Get: ${JSON.stringify(item)}`));
 
     const sub = eventEmitter.addListener(
       'onQuickActionItemPressed',
       ({ item, initial }) => {
-        
+        const { type, data } = item;
         console.log(
-          `---> Quick Action Item Clicked type:${item}, data:${JSON.stringify(initial)}, isInitial:${initial}`
+          `---> Quick Action Item Clicked type:${type}, data:${JSON.stringify(data)}, isInitial:${initial}`
         );
       }
     );

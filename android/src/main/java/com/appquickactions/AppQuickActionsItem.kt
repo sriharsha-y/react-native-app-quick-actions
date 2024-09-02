@@ -39,7 +39,10 @@ data class AppQuickActionsItem(
     if (data != null) {
       map.putMap(KeyName.data, Helper.toWritableMap(data))
     }
-    return map
+    val mapToSend = Arguments.createMap()
+    mapToSend.putMap(KeyName.item,map);
+    mapToSend.putBoolean(KeyName.initial,value = false)
+    return mapToSend
   }
 
   companion object {
@@ -50,6 +53,8 @@ data class AppQuickActionsItem(
       const val shortTitle = "shortTitle"
       const val iconName = "iconName"
       const val data = "data"
+      const val initial = "initial"
+      const val item = "item"
     }
 
     fun fromReadableMap(map: ReadableMap): AppQuickActionsItem? {
