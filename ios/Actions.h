@@ -12,6 +12,7 @@
 - (void)performActionForQuickActionItem:(UIApplicationShortcutItem *)quickActionItem;
 - (NSArray *)setQuickActions:(NSArray *)items;
 - (void)getQuickActions:(void (^)(NSArray *))callback;
+- (NSDictionary *)getInitialQuickAction;
 - (void)clearQuickActions;
 
 @end

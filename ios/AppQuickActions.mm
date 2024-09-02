@@ -48,9 +48,15 @@ RCT_EXPORT_METHOD(getQuickActions:(RCTPromiseResolveBlock)resolve
     }];
 }
 
+RCT_EXPORT_METHOD(getInitialQuickAction:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+    NSDictionary *quickActionItem = [Actions.shared getInitialQuickAction];
+    resolve(quickActionItem);
+}
+
 RCT_EXPORT_METHOD(clearQuickActions) {
     [Actions.shared clearQuickActions];
 }
+
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED

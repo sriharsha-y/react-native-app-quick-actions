@@ -73,6 +73,13 @@
     });
 }
 
+- (NSDictionary *)getInitialQuickAction {
+    if(self.unhandledQuickActionItem == nil) {
+        return nil;
+    }
+    return self.unhandledQuickActionItem.asDictionary;
+}
+
 - (void)clearQuickActions {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIApplication.sharedApplication.shortcutItems = nil;

@@ -38,7 +38,9 @@ export default function App() {
   useEffect(() => {
     const eventEmitter = new NativeEventEmitter(AppQuickActions);
 
-    AppQuickActions.getInitialShortcut().then((item)=>console.log(`---> Quick Action Initial Items Get: ${JSON.stringify(item)}`));
+    AppQuickActions.getInitialQuickAction().then((item) =>
+      console.log(`---> Quick Action Initial Get: ${JSON.stringify(item)}`)
+    );
 
     const sub = eventEmitter.addListener(
       'onQuickActionItemPressed',

@@ -8,7 +8,6 @@ export type QuickActionEventData = {
   item: QuickActionItem;
   initial: boolean;
 };
-
 export interface Specification {
   /**
    * Set the quick action items.
@@ -20,6 +19,11 @@ export interface Specification {
    * @returns a promise with the quick action items that were set
    */
   getQuickActions(): Promise<QuickActionItem[]>;
+
+  /**
+   * @returns a promise with the initial quick action item with which app is launched.
+   */
+  getInitialQuickAction(): Promise<QuickActionItem | null>;
 
   /**
    * Removes all the quick action items

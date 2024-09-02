@@ -38,11 +38,13 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
 
   init {
     reactApplicationContext.addActivityEventListener(this)
+    val shortcutItem = getShortcutItemFromIntent(reactApplicationContext.currentActivity?.intent)
+    shortcutItem?.let {  sendEvent(it) }
   }
 
 
   @TargetApi(25)
-  override fun getInitialShortcut(promise: Promise) {
+  override fun getInitialQuickAction(promise: Promise) {
     if (!isSupported()) {
       promise.reject(NotSupportedException)
     }
@@ -145,11 +147,16 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
   }
 
   private fun sendEvent(shortcutItem: AppQuickActionsItem) {
+    if(reactApplicationContext.isOnJSQueueThread)
+    {
+      Timer().schedule(1000) {
+        sendEvent(shortcutItem)
+      }
+      return
+    }
 
     reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
       ?.emit(EVENT_ON_SHORTCUT_ITEM_PRESSED, shortcutItem.toMap())
-
-
   }
 
   private fun getShortcutItemFromIntent(intent: Intent?): AppQuickActionsItem? {

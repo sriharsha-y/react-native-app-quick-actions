@@ -103,6 +103,16 @@ AppQuickActions.getQuickActions().then((items) =>
 );
 ```
 
+### getInitialQuickAction
+
+```js
+AppQuickActions.getInitialQuickAction().then((item) =>
+  console.log(`---> App Launched with QUick Action: ${JSON.stringify(item)}`)
+);
+```
+
+> When app launched with quick action this method can be used besides listening for event. On iOS subsequent calls to this method will result in null.
+
 ### clearQuickActions
 
 ```js
