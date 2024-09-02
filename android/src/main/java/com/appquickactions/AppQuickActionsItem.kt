@@ -39,9 +39,14 @@ data class AppQuickActionsItem(
     if (data != null) {
       map.putMap(KeyName.data, Helper.toWritableMap(data))
     }
+    return map
+  }
+
+  fun toEventPayloadMap(isInitial: Boolean): WritableMap {
+    val map = toMap()
     val mapToSend = Arguments.createMap()
     mapToSend.putMap(KeyName.item,map);
-    mapToSend.putBoolean(KeyName.initial,false)
+    mapToSend.putBoolean(KeyName.initial,isInitial)
     return mapToSend
   }
 

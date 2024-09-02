@@ -39,7 +39,7 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
   init {
     reactApplicationContext.addActivityEventListener(this)
     val shortcutItem = getShortcutItemFromIntent(reactApplicationContext.currentActivity?.intent)
-    shortcutItem?.let {  sendEvent(it) }
+    shortcutItem?.let {  sendEvent(it,true) }
   }
 
 
@@ -143,20 +143,20 @@ class AppQuickActionsModule internal constructor(context: ReactApplicationContex
 
   override fun onNewIntent(p0: Intent?) {
     val shortcutItem = getShortcutItemFromIntent(p0) ?: return
-    sendEvent(shortcutItem)
+    sendEvent(shortcutItem,false)
   }
 
-  private fun sendEvent(shortcutItem: AppQuickActionsItem) {
+  private fun sendEvent(shortcutItem: AppQuickActionsItem, isInitial: Boolean) {
     if(reactApplicationContext.isOnJSQueueThread)
     {
       Timer().schedule(1000) {
-        sendEvent(shortcutItem)
+        sendEvent(shortcutItem,isInitial)
       }
       return
     }
 
     reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      ?.emit(EVENT_ON_SHORTCUT_ITEM_PRESSED, shortcutItem.toMap())
+      ?.emit(EVENT_ON_SHORTCUT_ITEM_PRESSED, shortcutItem.toEventPayloadMap(isInitial))
   }
 
   private fun getShortcutItemFromIntent(intent: Intent?): AppQuickActionsItem? {
